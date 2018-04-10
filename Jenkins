@@ -4,7 +4,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t abhidevan/kube .'
+        sh 'docker build -t mobinzai/lap .'
       }
     }
     stage('Docker Push') {
@@ -12,25 +12,25 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push abhidevan/kube'
+          sh 'docker push mobinzai/lap'
 	}
       }
     }
     stage('Deleting the old builds and services') {
 	    agent any
 	    steps{
-		    sh 'kubectl delete deployments kube'
-		    sh 'kubectl delete services kube' 
+		    sh 'kubectl delete deployments lap'
+		    sh 'kubectl delete services lap' 
 		    }
 		 }
 	
 	stage('Deploying New Build To Kubernetes') {
 	    agent any
 	    steps{   
-	            sh 'docker pull abhidevan/kube'
-	    	    sh 'kubectl create deployment kube --image abhidevan/kube'
-		    sh 'kubectl set image deployments/kube kube=abhidevan/kube'
-		    sh 'kubectl create service nodeport kube --tcp=80:80'
+	            sh 'docker pull mobinzai/lap'
+	    	    sh 'kubectl create deployment lap --image mobinzai/lap'
+		    sh 'kubectl set image deployments/kube lap=mobinzai/lap'
+		    sh 'kubectl create service nodeport lap --tcp=80:80'
 	    }
       }
   }
