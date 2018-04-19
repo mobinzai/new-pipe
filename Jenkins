@@ -19,8 +19,8 @@ pipeline {
     stage('Deleting the old builds and services') {
 	    agent any
 	    steps{
-		    sh 'kubectl delete deployments lap'
-		    sh 'kubectl delete services lap' 
+		    //sh 'kubectl delete deployments lap'
+		    //sh 'kubectl delete services lap' 
 		    }
 		 }
 	
