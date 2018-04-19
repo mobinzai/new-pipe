@@ -20,7 +20,7 @@ pipeline {
 	    agent any
 	    steps{   
 	            sh 'docker pull mobinzai/lap'
-	    	    sh 'kubectl create deployment lap --image=mobinzai/lap'
+	    	    sh 'kubectl create deployments lap --image=mobinzai/lap'
 		    //sh 'kubectl set image deployments/kube lap=mobinzai/lap'
 		    sh 'kubectl create service nodeport lap --tcp=80:80'
 	    }
