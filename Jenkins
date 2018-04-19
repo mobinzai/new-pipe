@@ -20,7 +20,7 @@ pipeline {
 	    agent any
 	    steps{   
 	            sh 'docker push mobinzai/lap:latest'
-	    	    sh 'kkubectl set image deployment/lap lap=mobinzai/lap:latest'
+	    	    sh 'kubectl set image deployment/lap lap=mobinzai/lap:latest'
 		    
 	    }
       }
