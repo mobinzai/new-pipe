@@ -4,7 +4,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t mobinzai/lap .'
+        sh 'docker build -t mobinzai/lap'
       }
     }
     stage('Docker Push') {
@@ -21,7 +21,7 @@ pipeline {
 	    steps{   
 	            sh 'docker pull mobinzai/lap'
 	    	    sh 'kubectl create deployment lap --image mobinzai/lap'
-		    sh 'kubectl set image deployments/kube lap=mobinzai/lap'
+		    //sh 'kubectl set image deployments/kube lap=mobinzai/lap'
 		    sh 'kubectl create service nodeport lap --tcp=80:80'
 	    }
       }
