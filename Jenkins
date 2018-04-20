@@ -20,7 +20,7 @@ pipeline {
 	    agent any
 	    steps{
 		    sh 'docker pull mobinzai/mobinzai'
-		    sh 'kubectl create deployments mobinzai --image mobinzai/mobinzai'
+		    sh "kubectl create deployments mobinzai --image mobinzai/mobinzai"
 	    }
       }
   }
