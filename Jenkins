@@ -15,7 +15,6 @@ pipeline {
           sh 'docker push mobinzai/mobinzai'
 	}
       }
-    }
     stage('Deploy New Build To Kubernetes') {
 	    agent any
 	    steps{
