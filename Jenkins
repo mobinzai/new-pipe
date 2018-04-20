@@ -4,7 +4,7 @@ pipeline {
     stage('Docker Build') {
       agent any
       steps {
-        sh 'docker build -t maverick0803/hellowhale:latest .'
+        sh 'docker build -t mobinzai/mobinzai .'
       }
     }
     stage('Docker Push') {
@@ -12,15 +12,15 @@ pipeline {
       steps {
         withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
           sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-          sh 'docker push maverick0803/hellowhale:latest'
+          sh 'docker push mobinzai/mobinzai'
 	}
       }
     }
     stage('Deploy New Build To Kubernetes') {
 	    agent any
 	    steps{
-		    sh 'docker push maverick0803/hellowhale:latest'
-		    sh 'kubectl set image deployment/hellowhale hellowhale=maverick0803/hellowhale:latest'
+		    sh 'docker push mobinzai/mobinzai'
+		    sh 'kubectl set image deployment/hellowhale hellowhale=mobinzai/mobinzai'
 	    }
       }
   }
