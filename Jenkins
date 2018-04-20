@@ -19,8 +19,8 @@ pipeline {
     stage('Deploy New Build To Kubernetes') {
 	    agent any
 	    steps{
-		    sh 'docker push mobinzai/mobinzai'
-		    sh 'kubectl set image deployment/hellowhale hellowhale=mobinzai/mobinzai'
+		    sh 'docker pull mobinzai/mobinzai'
+		    sh 'kubectl create deployments mobinzai --image mobinzai/mobinzai'
 	    }
       }
   }
